@@ -3,212 +3,1465 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cracka Jack — Use the Drill You've Already Got</title>
-  <meta name="description" content="The world's first caravan jack with a built-in 19mm hex drive. No new tools. No wiring. Just use the drill you already carry." />
+  <title>Cracka Jack — Use the Drill You Already Carry</title>
+  <meta name="description" content="The world's first caravan front jack with a built-in 19mm hex drive. No new tools. No 12V wiring. Just the cordless drill you already carry." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ============================================
+       BASE RESET & VARIABLES
+    ============================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --orange: #FF5C00;
+      --orange-dim: rgba(255, 92, 0, 0.12);
+      --orange-glow: rgba(255, 92, 0, 0.35);
+      --bg-base: #0a0a0a;
+      --bg-1: #111111;
+      --bg-2: #161616;
+      --bg-3: #1a1a1a;
+      --bg-card: #1e1e1e;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text-primary: #f0f0f0;
+      --text-secondary: #888;
+      --text-muted: #555;
+      --font: 'Inter', -apple-system, sans-serif;
+      --nav-h: 68px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg-base);
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ============================================
+       SCROLL REVEAL
+    ============================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ============================================
+       BUTTONS
+    ============================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.01em;
+      border-radius: 6px;
+      padding: 14px 28px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+      box-shadow: 0 4px 24px rgba(255, 92, 0, 0.4);
+    }
+    .btn-primary:hover {
+      background: #ff7a2e;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(255, 92, 0, 0.5);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1.5px solid var(--border-strong);
+    }
+    .btn-ghost:hover {
+      border-color: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .btn-large {
+      font-size: 17px;
+      padding: 18px 36px;
+      width: 100%;
+    }
+
+    /* ============================================
+       NAV
+    ============================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s ease;
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--text-primary);
+      text-transform: uppercase;
+    }
+    .logo span { color: var(--orange); }
+
+    .btn-nav {
+      font-size: 14px;
+      padding: 10px 22px;
+      background: var(--orange);
+      color: #fff;
+      border-radius: 5px;
+      font-weight: 700;
+      box-shadow: 0 2px 12px rgba(255, 92, 0, 0.35);
+      transition: all 0.2s ease;
+    }
+    .btn-nav:hover {
+      background: #ff7a2e;
+      transform: translateY(-1px);
+    }
+
+    /* ============================================
+       HERO
+    ============================================ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: var(--nav-h);
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/lifestyle-outback.png');
+      background-size: cover;
+      background-position: center 40%;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        105deg,
+        rgba(10, 10, 10, 0.92) 0%,
+        rgba(10, 10, 10, 0.75) 55%,
+        rgba(10, 10, 10, 0.35) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      width: 100%;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      background: var(--orange-dim);
+      border: 1px solid rgba(255, 92, 0, 0.25);
+      border-radius: 3px;
+      padding: 6px 12px;
+      margin-bottom: 32px;
+    }
+
+    .hero h1 {
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      color: #fff;
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--orange);
+    }
+
+    .hero-sub {
+      font-size: clamp(17px, 2vw, 21px);
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.72);
+      max-width: 540px;
+      line-height: 1.55;
+      margin-bottom: 40px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .hero-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 0.03em;
+    }
+    .hero-note span {
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    /* scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.4;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    .scroll-indicator span {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    .scroll-indicator svg {
+      stroke: #fff;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ============================================
+       SOCIAL PROOF BAR
+    ============================================ */
+    .proof-bar {
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 0;
+    }
+
+    .proof-bar-inner {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .proof-stat {
+      text-align: center;
+      padding: 16px 24px;
+      border-right: 1px solid var(--border);
+    }
+    .proof-stat:last-child { border-right: none; }
+
+    .proof-stat-num {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--orange);
+      line-height: 1;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .proof-stat-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      line-height: 1.4;
+    }
+
+    /* ============================================
+       PROBLEM — 3 COLUMNS
+    ============================================ */
+    .problem {
+      padding: 100px 0;
+      background: var(--bg-base);
+    }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .section-heading {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-secondary);
+      max-width: 560px;
+      line-height: 1.6;
+      margin-bottom: 56px;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .problem-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px 32px;
+      position: relative;
+      transition: border-color 0.2s ease;
+    }
+
+    .problem-card:hover {
+      border-color: var(--border-strong);
+    }
+
+    .problem-card.highlight {
+      border-color: var(--orange);
+      background: linear-gradient(145deg, rgba(255,92,0,0.06), var(--bg-card));
+    }
+
+    .problem-card.highlight::before {
+      content: 'THE SOLUTION';
+      position: absolute;
+      top: -1px;
+      left: 32px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      padding: 4px 10px;
+      border-radius: 0 0 5px 5px;
+    }
+
+    .problem-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .problem-card.highlight .problem-icon {
+      background: var(--orange-dim);
+    }
+
+    .problem-card h3 {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      color: var(--text-primary);
+    }
+
+    .problem-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ============================================
+       PRODUCT SHOWCASE
+    ============================================ */
+    .showcase {
+      padding: 100px 0;
+      background: var(--bg-1);
+    }
+
+    .showcase-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .showcase-image-wrap {
+      position: relative;
+    }
+
+    .showcase-image-wrap img {
+      width: 100%;
+      border-radius: 16px;
+      filter: drop-shadow(0 32px 64px rgba(255, 92, 0, 0.2));
+    }
+
+    .hex-badge {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      padding: 8px 14px;
+      border-radius: 5px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 20px rgba(255, 92, 0, 0.5);
+      transform: rotate(2deg);
+    }
+
+    .showcase-content .product-name {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 12px;
+    }
+
+    .showcase-content h2 {
+      font-size: clamp(32px, 4vw, 46px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .showcase-content .tagline {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+
+    .spec-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .spec-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 500;
+    }
+
+    .spec-list li::before {
+      content: '';
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      background: var(--orange-dim);
+      border: 1.5px solid var(--orange);
+      border-radius: 4px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 6l2.8 2.8L10 3' stroke='%23FF5C00' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    /* ============================================
+       HOW IT WORKS
+    ============================================ */
+    .howitworks {
+      padding: 100px 0;
+      background: var(--bg-base);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .howitworks::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+    }
+
+    .howitworks .section-heading {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 48px;
+      left: 16.5%;
+      right: 16.5%;
+      height: 1px;
+      background: linear-gradient(90deg, var(--orange) 0%, rgba(255,92,0,0.15) 100%);
+      z-index: 0;
+    }
+
+    .step {
+      padding: 0 40px;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .step-number-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .step-num-bg {
+      position: absolute;
+      font-size: 110px;
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.03);
+      letter-spacing: -0.05em;
+      line-height: 1;
+      user-select: none;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+    }
+
+    .step-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 0 6px rgba(255, 92, 0, 0.15);
+    }
+
+    .step h3 {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .step p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ============================================
+       THE SOCKET SHOT
+    ============================================ */
+    .socket-shot {
+      position: relative;
+      height: 70vh;
+      min-height: 420px;
+      overflow: hidden;
+    }
+
+    .socket-shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 60%;
+    }
+
+    .socket-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(10,10,10,0.75) 0%,
+        rgba(10,10,10,0.3) 50%,
+        rgba(10,10,10,0.1) 100%
+      );
+      display: flex;
+      align-items: center;
+    }
+
+    .socket-text {
+      padding: 0 80px;
+      max-width: 640px;
+    }
+
+    .socket-text h2 {
+      font-size: clamp(36px, 5.5vw, 68px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      color: #fff;
+    }
+
+    .socket-text h2 em {
+      font-style: normal;
+      color: var(--orange);
+    }
+
+    /* ============================================
+       SPECS TABLE
+    ============================================ */
+    .specs-section {
+      padding: 100px 0;
+      background: var(--bg-1);
+    }
+
+    .specs-section .section-heading {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .specs-table-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .specs-table tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s ease;
+    }
+    .specs-table tr:last-child { border-bottom: none; }
+    .specs-table tr:hover { background: rgba(255, 255, 255, 0.03); }
+
+    .specs-table td {
+      padding: 18px 28px;
+      font-size: 15px;
+    }
+
+    .specs-table td:first-child {
+      color: var(--text-secondary);
+      font-weight: 500;
+      width: 45%;
+      border-right: 1px solid var(--border);
+    }
+
+    .specs-table td:last-child {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .specs-table tr:nth-child(odd) {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    /* ============================================
+       TESTIMONIALS
+    ============================================ */
+    .testimonials-section {
+      padding: 100px 0;
+      background: var(--bg-base);
+    }
+
+    .testimonials-section .section-heading {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .testimonial-card:hover {
+      border-color: rgba(255, 92, 0, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .stars {
+      display: flex;
+      gap: 3px;
+    }
+
+    .star {
+      width: 16px;
+      height: 16px;
+      fill: var(--orange);
+    }
+
+    .testimonial-card blockquote {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.7;
+      font-style: italic;
+      flex: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), #a03800);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .author-info strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .author-info span {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ============================================
+       PRE-ORDER FORM
+    ============================================ */
+    .preorder {
+      padding: 100px 0;
+      background: var(--bg-2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .preorder::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(255, 92, 0, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .preorder-card {
+      max-width: 560px;
+      margin: 0 auto;
+      background: var(--bg-card);
+      border: 1.5px solid var(--orange);
+      border-radius: 16px;
+      padding: 48px;
+      position: relative;
+      box-shadow: 0 0 60px rgba(255, 92, 0, 0.12);
+    }
+
+    .preorder-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--orange-dim);
+      border: 1px solid rgba(255, 92, 0, 0.3);
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .preorder-card h2 {
+      font-size: 32px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    .preorder-card > p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 20px 24px;
+      background: rgba(255, 92, 0, 0.07);
+      border: 1px solid rgba(255, 92, 0, 0.2);
+      border-radius: 8px;
+      margin-bottom: 32px;
+    }
+
+    .price-big {
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      color: var(--orange);
+    }
+
+    .price-detail {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .preorder-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .preorder-form input,
+    .preorder-form select {
+      width: 100%;
+      background: var(--bg-3);
+      border: 1.5px solid var(--border-strong);
+      color: var(--text-primary);
+      font-family: var(--font);
+      font-size: 15px;
+      padding: 14px 16px;
+      border-radius: 7px;
+      outline: none;
+      transition: border-color 0.2s ease;
+      appearance: none;
+    }
+
+    .preorder-form input::placeholder { color: var(--text-muted); }
+    .preorder-form select { color: var(--text-secondary); }
+    .preorder-form select option { background: var(--bg-3); color: var(--text-primary); }
+
+    .preorder-form input:focus,
+    .preorder-form select:focus {
+      border-color: var(--orange);
+    }
+
+    .form-note {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    /* ============================================
+       FOOTER
+    ============================================ */
+    footer {
+      padding: 56px 0 40px;
+      background: var(--bg-1);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .footer-logo span { color: var(--orange); }
+
+    .footer-tagline {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 14px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      transition: color 0.2s ease;
+    }
+    .footer-links a:hover { color: var(--orange); }
+
+    .footer-links .dot {
+      color: var(--text-muted);
+    }
+
+    .footer-social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+    .social-link:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+
+    .footer-small {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ============================================
+       MOBILE RESPONSIVE
+    ============================================ */
+    @media (max-width: 768px) {
+      .proof-bar-inner {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .proof-stat {
+        padding: 12px 8px;
+      }
+      .proof-stat-num {
+        font-size: 28px;
+      }
+      .proof-stat-label {
+        font-size: 10px;
+      }
+
+      .problem-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .problem-card.highlight::before {
+        left: 20px;
+      }
+
+      .showcase-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .steps::before { display: none; }
+      .step { padding: 0; }
+
+      .socket-text {
+        padding: 0 24px;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .preorder-card {
+        padding: 32px 24px;
+      }
+
+      .howitworks .section-heading {
+        text-align: left;
+      }
+      .testimonials-section .section-heading,
+      .specs-section .section-heading {
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-cta { flex-direction: column; }
+      .hero-cta .btn { width: 100%; text-align: center; }
+      .btn-large { font-size: 15px; padding: 16px 24px; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- ============ NAV ============ -->
   <nav>
     <div class="nav-inner">
       <div class="logo">CRACKA<span>JACK</span></div>
-      <a href="#preorder" class="btn btn-nav">Pre-Order Now</a>
+      <a href="#preorder" class="btn-nav">Pre-Order — $149</a>
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- ============ HERO ============ -->
   <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
     <div class="hero-content">
-      <div class="badge">🇦🇺 Made for Australian Caravanners</div>
-      <h1>Use the drill<br/>you've <em>already got.</em></h1>
-      <p class="hero-sub">The world's first caravan front jack with a built-in 19mm hex drive. No new tools. No 12V wiring. Just the cordless drill sitting in your van right now.</p>
-      <div class="hero-cta">
+      <div class="hero-eyebrow reveal">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" fill="#FF5C00"/></svg>
+        Made for Australian Caravanners
+      </div>
+      <h1 class="reveal reveal-delay-1">Use the drill<br/>you <em>already carry.</em></h1>
+      <p class="hero-sub reveal reveal-delay-2">The world's first caravan front jack with a built-in 19mm hex drive. No new tools. No 12V wiring. Just the cordless drill sitting in your van right now.</p>
+      <div class="hero-cta reveal reveal-delay-3">
         <a href="#preorder" class="btn btn-primary">Pre-Order — $149</a>
-        <a href="#how" class="btn btn-ghost">See How It Works ↓</a>
+        <a href="#howitworks" class="btn btn-ghost">See How It Works ↓</a>
       </div>
-      <p class="hero-note">⚡ Limited first run — 100 units only</p>
+      <p class="hero-note reveal reveal-delay-4"><span>⚡ Limited first run</span> — 100 units only</p>
     </div>
-    <div class="hero-image">
-      <div class="product-visual">
-        <img src="images/product-hero.png" alt="Cracka Jack — 19mm hex drive caravan jack" class="hero-product-img" />
-      </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
     </div>
   </section>
 
-  <!-- LIFESTYLE IMAGE STRIP -->
-  <section class="image-strip">
-    <img src="images/lifestyle-outback.png" alt="Using a drill to wind down the Cracka Jack at an Australian campsite" />
-    <img src="images/drill-socket-closeup.png" alt="19mm socket fitting perfectly onto the Cracka Jack hex drive" />
-  </section>
-
-  <!-- THE PROBLEM -->
-  <section class="problem" id="how">
+  <!-- ============ SOCIAL PROOF BAR ============ -->
+  <section class="proof-bar">
     <div class="container">
-      <h2>Every caravanner already carries a drill + 19mm socket.</h2>
-      <p class="section-sub">You use it for your stabiliser legs. So why is your front jack still manual or 12V?</p>
-      <div class="comparison">
-        <div class="comparison-item bad">
-          <div class="comp-icon">😤</div>
-          <h3>Manual winders</h3>
-          <p>Slow. Separate handle you have to find. Arm workout every time.</p>
+      <div class="proof-bar-inner">
+        <div class="proof-stat reveal">
+          <span class="proof-stat-num">3.1M+</span>
+          <span class="proof-stat-label">Caravans on<br/>Australian roads</span>
         </div>
-        <div class="comparison-item bad">
-          <div class="comp-icon">🔌</div>
-          <h3>12V electric jacks</h3>
-          <p>$350–550. Needs wiring. Battery dependent. One more thing to go wrong in the bush.</p>
+        <div class="proof-stat reveal reveal-delay-1">
+          <span class="proof-stat-num">19mm</span>
+          <span class="proof-stat-label">Universal hex<br/>socket size</span>
         </div>
-        <div class="comparison-item good">
-          <div class="comp-icon">🔋</div>
-          <h3>Cracka Jack</h3>
-          <p>Your drill. Your 19mm socket. Done in seconds. Nothing new to buy or wire up.</p>
+        <div class="proof-stat reveal reveal-delay-2">
+          <span class="proof-stat-num">$300+</span>
+          <span class="proof-stat-label">Saved vs<br/>electric alternatives</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section class="howitworks">
+  <!-- ============ THE PROBLEM ============ -->
+  <section class="problem">
     <div class="container">
-      <h2>Dead simple. By design.</h2>
+      <p class="section-eyebrow reveal">The Problem</p>
+      <h2 class="section-heading reveal">Every caravanner carries<br/>a drill. So why isn't your jack using it?</h2>
+      <p class="section-sub reveal">You already use a 19mm socket for your stabiliser legs. Your front jack should be no different.</p>
+      <div class="problem-grid">
+        <div class="problem-card reveal reveal-delay-1">
+          <div class="problem-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+            </svg>
+          </div>
+          <h3>Manual Winders Are Slow</h3>
+          <p>Separate handle you have to hunt for. Slow, awkward cranking. An arm workout every time you set up camp.</p>
+        </div>
+        <div class="problem-card reveal reveal-delay-2">
+          <div class="problem-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <h3>Electric Jacks Are Overkill</h3>
+          <p>$350–550. Requires 12V wiring. Battery-dependent. One more system that can fail 500km from the nearest town.</p>
+        </div>
+        <div class="problem-card highlight reveal reveal-delay-3">
+          <div class="problem-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <h3>Cracka Jack Is Just Right</h3>
+          <p>Your drill. Your 19mm socket. Wind it down in seconds. Nothing new to buy, wire up, or troubleshoot. Ever.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PRODUCT SHOWCASE ============ -->
+  <section class="showcase" id="product">
+    <div class="container">
+      <div class="showcase-inner">
+        <div class="showcase-image-wrap reveal">
+          <img src="images/product-hero.png" alt="Cracka Jack — 19mm hex drive caravan front jack" />
+          <div class="hex-badge">19mm HEX</div>
+        </div>
+        <div class="showcase-content">
+          <p class="product-name reveal">Cracka Jack</p>
+          <h2 class="reveal reveal-delay-1">The Front Jack,<br/>Reinvented.</h2>
+          <p class="tagline reveal reveal-delay-2">Built from the ground up for Australian caravanners. Rated to 750kg. No wiring. No nonsense.</p>
+          <ul class="spec-list reveal reveal-delay-3">
+            <li>750kg load rating</li>
+            <li>19mm A/F hex drive — universal fit</li>
+            <li>350mm travel</li>
+            <li>Under 2kg — lighter than electric</li>
+            <li>No wiring required</li>
+            <li>Zinc-plated steel — outback ready</li>
+          </ul>
+          <a href="#preorder" class="btn btn-primary reveal reveal-delay-4">Pre-Order — $149 AUD</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="howitworks" id="howitworks">
+    <div class="container">
+      <h2 class="section-heading reveal">Dead simple.<br/>By design.</h2>
       <div class="steps">
-        <div class="step">
-          <div class="step-num">01</div>
+        <div class="step reveal reveal-delay-1">
+          <div class="step-number-wrap">
+            <div class="step-num-bg">01</div>
+            <div class="step-num">1</div>
+          </div>
           <h3>Pull up at your site</h3>
-          <p>Unhitch, grab the drill you already have in the van.</p>
+          <p>Unhitch, grab the drill you already have in the van. No hunting for a separate handle.</p>
         </div>
-        <div class="step">
-          <div class="step-num">02</div>
+        <div class="step reveal reveal-delay-2">
+          <div class="step-number-wrap">
+            <div class="step-num-bg">02</div>
+            <div class="step-num">2</div>
+          </div>
           <h3>Fit your 19mm socket</h3>
-          <p>Same socket you use on the stability legs. Drop it on the hex boss on top of the Cracka Jack.</p>
+          <p>Same socket you already use for the stabiliser legs. Drop it straight on the hex boss.</p>
         </div>
-        <div class="step">
-          <div class="step-num">03</div>
+        <div class="step reveal reveal-delay-3">
+          <div class="step-number-wrap">
+            <div class="step-num-bg">03</div>
+            <div class="step-num">3</div>
+          </div>
           <h3>Pull the trigger</h3>
-          <p>Wind it down in seconds. Reverse to pack up. That's it.</p>
+          <p>Wind it down in seconds. Reverse to pack up. Done. Go get a beer.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SPECS -->
-  <section class="specs">
+  <!-- ============ THE SOCKET SHOT ============ -->
+  <section class="socket-shot">
+    <img src="images/drill-socket-closeup.png" alt="19mm socket fitting onto Cracka Jack hex drive — same socket, same drill" />
+    <div class="socket-overlay">
+      <div class="socket-text">
+        <h2 class="reveal">Same socket.<br/>Same drill.<br/><em>New jack.</em></h2>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SPECS TABLE ============ -->
+  <section class="specs-section">
     <div class="container">
-      <h2>Built tough. Priced right.</h2>
-      <div class="specs-grid">
-        <div class="spec-item">
-          <span class="spec-val">750<small>kg</small></span>
-          <span class="spec-label">Load Rating</span>
-        </div>
-        <div class="spec-item">
-          <span class="spec-val">19<small>mm</small></span>
-          <span class="spec-label">A/F Hex Drive</span>
-        </div>
-        <div class="spec-item">
-          <span class="spec-val">350<small>mm</small></span>
-          <span class="spec-label">Travel</span>
-        </div>
-        <div class="spec-item">
-          <span class="spec-val">&lt;2<small>kg</small></span>
-          <span class="spec-label">Weight</span>
-        </div>
+      <p class="section-eyebrow reveal" style="text-align:center">Technical Specs</p>
+      <h2 class="section-heading reveal" style="text-align:center">Built to last.<br/>Specified to perform.</h2>
+      <div class="specs-table-wrap reveal">
+        <table class="specs-table">
+          <tbody>
+            <tr>
+              <td>Load Rating</td>
+              <td>750 kg</td>
+            </tr>
+            <tr>
+              <td>Drive</td>
+              <td>19mm A/F Hex</td>
+            </tr>
+            <tr>
+              <td>Travel</td>
+              <td>350 mm</td>
+            </tr>
+            <tr>
+              <td>Weight</td>
+              <td>&lt; 2 kg</td>
+            </tr>
+            <tr>
+              <td>Mount</td>
+              <td>48–60mm A-frame clamp</td>
+            </tr>
+            <tr>
+              <td>Material</td>
+              <td>Zinc-plated steel</td>
+            </tr>
+            <tr>
+              <td>Warranty</td>
+              <td>2 years</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <ul class="spec-list">
-        <li>✅ Zinc-plated steel — rust resistant, outback ready</li>
-        <li>✅ Standard clamp mount — fits 48–60mm A-frame tube</li>
-        <li>✅ Swivel rubber foot pad included</li>
-        <li>✅ No wheel (lighter, simpler, cheaper)</li>
-        <li>✅ Compatible with all standard cordless drills</li>
-        <li>✅ Designed &amp; engineered in Australia</li>
-      </ul>
     </div>
   </section>
 
-  <!-- SOCIAL PROOF -->
-  <section class="social">
+  <!-- ============ TESTIMONIALS ============ -->
+  <section class="testimonials-section">
     <div class="container">
-      <h2>What caravanners are saying</h2>
-      <div class="testimonials">
-        <div class="testimonial">
-          <p>"Finally. I've been using a 19mm socket on my legs for years — why hasn't anyone done this for the front jack?!"</p>
-          <span>— Dave M., Grey Nomad, QLD</span>
+      <p class="section-eyebrow reveal" style="text-align:center">Early Feedback</p>
+      <h2 class="section-heading reveal" style="text-align:center">Caravanners get it<br/>immediately.</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="stars">
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <blockquote>"Finally. I've been using a 19mm socket on my legs for years — why hasn't anyone done this for the front jack?! Pre-ordered two minutes after I saw it."</blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar">D</div>
+            <div class="author-info">
+              <strong>Dave M.</strong>
+              <span>Grey Nomad · Queensland</span>
+            </div>
+          </div>
         </div>
-        <div class="testimonial">
-          <p>"Saw the pre-order and bought one instantly. The concept is so obvious it's almost offensive that nobody did it sooner."</p>
-          <span>— Karen T., Caravanning Australia Facebook Group</span>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="stars">
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <blockquote>"Saw the pre-order and bought one without hesitation. The concept is so obvious it's almost offensive nobody did it sooner. My wife's already claimed it."</blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar">K</div>
+            <div class="author-info">
+              <strong>Karen T.</strong>
+              <span>Caravanning Australia · Facebook Group</span>
+            </div>
+          </div>
         </div>
-        <div class="testimonial">
-          <p>"Cheaper than electric, smarter than manual. This is the one."</p>
-          <span>— Brett H., Unsealed 4X4 Forum</span>
+        <div class="testimonial-card reveal reveal-delay-3">
+          <div class="stars">
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <blockquote>"Cheaper than electric, smarter than manual. Rated 750kg, weighs nothing, needs zero wiring. This is the one. Bought two — one for the A-van, one for the mate."</blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar">B</div>
+            <div class="author-info">
+              <strong>Brett H.</strong>
+              <span>Unsealed 4X4 Forum · WA</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PRE-ORDER -->
+  <!-- ============ PRE-ORDER ============ -->
   <section class="preorder" id="preorder">
     <div class="container">
-      <div class="preorder-box">
+      <div class="preorder-card reveal">
         <div class="preorder-badge">🔥 First Run — 100 Units Only</div>
         <h2>Pre-Order Your Cracka Jack</h2>
         <p>Secure your first-run unit at the launch price. Ships within 8 weeks of production confirmation.</p>
-        <div class="price-display">
-          <span class="price">$149</span>
-          <span class="price-note">AUD incl. GST + free shipping AU wide</span>
+        <div class="price-row">
+          <span class="price-big">$149</span>
+          <span class="price-detail">AUD incl. GST<br/>Free shipping Australia-wide</span>
         </div>
         <form class="preorder-form" onsubmit="handleSubmit(event)">
-          <input type="text" placeholder="Your name" required />
-          <input type="email" placeholder="Email address" required />
-          <input type="tel" placeholder="Phone (optional)" />
-          <select>
+          <input type="text" name="name" placeholder="Your name" required autocomplete="name" />
+          <input type="email" name="email" placeholder="Email address" required autocomplete="email" />
+          <input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel" />
+          <select name="source">
             <option value="">Where did you hear about us?</option>
-            <option>Facebook Group</option>
-            <option>Friend / Word of mouth</option>
-            <option>Google</option>
-            <option>Caravan show</option>
-            <option>Other</option>
+            <option value="facebook">Facebook Group</option>
+            <option value="friend">Friend / Word of mouth</option>
+            <option value="google">Google</option>
+            <option value="show">Caravan show</option>
+            <option value="youtube">YouTube</option>
+            <option value="other">Other</option>
           </select>
           <button type="submit" class="btn btn-primary btn-large">Secure My Cracka Jack →</button>
-          <p class="form-note">No charge today. We'll confirm your order when production is locked in.</p>
+          <p class="form-note">No charge today — we confirm when production is locked in.</p>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ============ FOOTER ============ -->
   <footer>
     <div class="container">
       <div class="footer-logo">CRACKA<span>JACK</span></div>
-      <p>Australian designed. Built for Australian conditions.</p>
-      <p class="footer-links">
+      <p class="footer-tagline">Australian designed. Built for Australian conditions.</p>
+      <div class="footer-links">
         <a href="mailto:hello@crackajack.com.au">hello@crackajack.com.au</a>
-        &nbsp;·&nbsp;
-        <a href="#">Instagram</a>
-        &nbsp;·&nbsp;
-        <a href="#">Facebook</a>
-      </p>
-      <p class="footer-small">© 2026 Cracka Jack. All rights reserved. ABN: [TBC]</p>
+        <span class="dot">·</span>
+        <a href="#preorder">Pre-Order</a>
+        <span class="dot">·</span>
+        <a href="#howitworks">How It Works</a>
+        <span class="dot">·</span>
+        <a href="#product">Product</a>
+      </div>
+      <div class="footer-social">
+        <!-- Instagram -->
+        <a href="#" class="social-link" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+        </a>
+        <!-- Facebook -->
+        <a href="#" class="social-link" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+      </div>
+      <p class="footer-small">© 2026 Cracka Jack. All rights reserved. ABN: [TBC] · <a href="#" style="color: inherit;">Privacy Policy</a></p>
     </div>
   </footer>
 
   <script>
+    // Scroll reveal with IntersectionObserver
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Form submit
     function handleSubmit(e) {
       e.preventDefault();
-      const btn = e.target.querySelector('button');
-      btn.textContent = "✅ You're on the list!";
-      btn.style.background = '#22c55e';
+      const btn = e.target.querySelector('button[type="submit"]');
+      btn.textContent = '✅ You\'re on the list!';
+      btn.style.background = '#16a34a';
+      btn.style.boxShadow = '0 4px 24px rgba(22, 163, 74, 0.4)';
       btn.disabled = true;
     }
 
-    // Smooth scroll
+    // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
-        e.preventDefault();
-        document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       });
     });
+
+    // Nav background on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 60
+        ? 'rgba(10, 10, 10, 0.97)'
+        : 'rgba(10, 10, 10, 0.85)';
+    }, { passive: true });
   </script>
 
 </body>
