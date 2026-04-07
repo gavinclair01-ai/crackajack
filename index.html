@@ -3,1291 +3,1087 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cracka Jack — Use the Drill You Already Carry</title>
-  <meta name="description" content="The world's first caravan front jack with a built-in 19mm hex drive. No new tools. No 12V wiring. Just the cordless drill you already carry." />
+  <title>Cracka Jack — The Front Jack That Works With Your Drill</title>
+  <meta name="description" content="Cracka Jack is the caravan front jockey jack with a 19mm hex drive. Use the cordless drill and socket you already carry. No wiring. No new tools. Pre-order from $149 AUD." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400;1,14..32,500&display=swap" rel="stylesheet" />
   <style>
-    /* ============================================
-       BASE RESET & VARIABLES
-    ============================================ */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    /* ─── RESET ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ─── TOKENS ─────────────────────────────────────── */
     :root {
-      --orange: #FF5C00;
-      --orange-dim: rgba(255, 92, 0, 0.10);
-      --orange-glow: rgba(255, 92, 0, 0.25);
-      --bg-base: #ffffff;
-      --bg-alt: #f5f5f5;
-      --bg-card: #ffffff;
-      --border: #e8e8e8;
-      --border-strong: #cccccc;
-      --text-primary: #111111;
-      --text-secondary: #444444;
-      --text-muted: #888888;
-      --font: 'Inter', -apple-system, sans-serif;
-      --nav-h: 68px;
+      --orange:       #FF5C00;
+      --orange-light: #fff3ec;
+      --black:        #111111;
+      --white:        #ffffff;
+      --grey:         #f7f7f7;
+      --border:       #eeeeee;
+      --border-mid:   #dddddd;
+      --text:         #111111;
+      --text-2:       #444444;
+      --text-3:       #888888;
+      --font:         'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --nav-h:        68px;
+      --max:          1200px;
+      --radius:       10px;
     }
 
-    html {
-      scroll-behavior: smooth;
-      -webkit-font-smoothing: antialiased;
-    }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 
     body {
       font-family: var(--font);
-      background: var(--bg-base);
-      color: var(--text-primary);
+      background: var(--white);
+      color: var(--text);
       overflow-x: hidden;
       line-height: 1.6;
     }
 
     img { display: block; max-width: 100%; }
-    a { text-decoration: none; color: inherit; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
 
+    /* ─── UTILITY ────────────────────────────────────── */
     .container {
       width: 100%;
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 24px;
+      max-width: var(--max);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 24px;
+      padding-right: 24px;
     }
 
-    /* ============================================
-       SCROLL REVEAL
-    ============================================ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
+    .orange { color: var(--orange); }
 
-    /* ============================================
-       BUTTONS
-    ============================================ */
-    .btn {
+    .pill {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-family: var(--font);
+      gap: 6px;
+      background: var(--orange-light);
+      color: var(--orange);
+      font-size: 13px;
       font-weight: 700;
-      font-size: 15px;
-      letter-spacing: 0.01em;
-      border-radius: 6px;
-      padding: 14px 28px;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s ease;
-      white-space: nowrap;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
     }
 
     .btn-primary {
-      background: var(--orange);
-      color: #fff;
-      box-shadow: 0 4px 24px rgba(255, 92, 0, 0.35);
-    }
-    .btn-primary:hover {
-      background: #ff7a2e;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(255, 92, 0, 0.45);
-    }
-    .btn-primary:active { transform: translateY(0); }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--text-primary);
-      border: 1.5px solid #cccccc;
-    }
-    .btn-ghost:hover {
-      border-color: #999;
-      background: rgba(0, 0, 0, 0.04);
-    }
-
-    .btn-large {
-      font-size: 17px;
-      padding: 18px 36px;
-      width: 100%;
-    }
-
-    /* ============================================
-       NAV
-    ============================================ */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      height: var(--nav-h);
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      transition: background 0.3s ease;
-    }
-
-    .nav-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      color: var(--text-primary);
-      text-transform: uppercase;
-    }
-    .logo span { color: var(--orange); }
-
-    .btn-nav {
-      font-size: 14px;
-      padding: 10px 22px;
-      background: var(--orange);
-      color: #fff;
-      border-radius: 5px;
-      font-weight: 700;
-      box-shadow: 0 2px 12px rgba(255, 92, 0, 0.3);
-      transition: all 0.2s ease;
-    }
-    .btn-nav:hover {
-      background: #ff7a2e;
-      transform: translateY(-1px);
-    }
-
-    /* ============================================
-       HERO
-    ============================================ */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: var(--nav-h);
-      overflow: hidden;
-      background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%);
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 80px 24px;
-      width: 100%;
-    }
-
-    .hero-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 12px;
+      background: var(--orange);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 15px;
       font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--orange);
-      background: var(--orange-dim);
-      border: 1px solid rgba(255, 92, 0, 0.25);
-      border-radius: 3px;
-      padding: 6px 12px;
-      margin-bottom: 32px;
+      letter-spacing: 0.01em;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      border: 2px solid var(--orange);
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      white-space: nowrap;
     }
+    .btn-primary:hover { background: #e05000; border-color: #e05000; transform: translateY(-1px); }
 
-    .hero h1 {
-      font-size: clamp(52px, 8vw, 96px);
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      border: 2px solid var(--border-mid);
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .btn-ghost:hover { border-color: var(--text); color: var(--text); }
+
+    /* ─── NAV ────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+    .nav-logo {
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+      color: var(--black);
+    }
+    .nav-logo .jack { color: var(--orange); }
+    .nav-cta { font-size: 14px; padding: 10px 20px; }
+
+    /* ─── HERO ───────────────────────────────────────── */
+    .hero {
+      background: var(--white);
+      padding: 80px 0 80px;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+    }
+    .hero-content { max-width: 560px; }
+    .hero-badge { margin-bottom: 24px; }
+    .hero-h1 {
+      font-size: 72px;
       font-weight: 900;
       line-height: 1.0;
-      letter-spacing: -0.04em;
-      color: var(--text-primary);
-      max-width: 760px;
+      letter-spacing: -3px;
+      color: var(--black);
       margin-bottom: 24px;
     }
-
-    .hero h1 em {
-      font-style: normal;
-      color: var(--orange);
-    }
-
     .hero-sub {
-      font-size: clamp(17px, 2vw, 21px);
+      font-size: 20px;
       font-weight: 400;
-      color: var(--text-secondary);
-      max-width: 540px;
+      color: var(--text-2);
       line-height: 1.55;
-      margin-bottom: 40px;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
+      max-width: 420px;
       margin-bottom: 36px;
     }
-
-    .hero-note {
-      font-size: 13px;
-      color: var(--text-muted);
-      letter-spacing: 0.03em;
-    }
-    .hero-note span {
-      color: var(--orange);
-      font-weight: 600;
-    }
-
-    /* scroll indicator */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
+    .hero-actions {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 6px;
-      opacity: 0.35;
-      animation: bounce 2s ease-in-out infinite;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
     }
-    .scroll-indicator span {
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-secondary);
+    .hero-scarcity {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-3);
+      letter-spacing: 0.01em;
     }
-    .scroll-indicator svg {
-      stroke: var(--text-secondary);
+    .hero-image {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
     }
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(6px); }
-    }
-
-    /* ============================================
-       SOCIAL PROOF BAR — intentionally dark
-    ============================================ */
-    .proof-bar {
-      background: #111111;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding: 40px 0;
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-height: 520px;
     }
 
-    .proof-bar-inner {
+    /* ─── TRUST BAR ──────────────────────────────────── */
+    .trust-bar {
+      background: var(--black);
+      padding: 60px 0;
+    }
+    .trust-bar-inner {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 0;
     }
-
-    .proof-stat {
+    .trust-item {
       text-align: center;
-      padding: 16px 24px;
-      border-right: 1px solid rgba(255,255,255,0.08);
+      padding: 0 32px;
+      border-right: 1px solid #2a2a2a;
     }
-    .proof-stat:last-child { border-right: none; }
-
-    .proof-stat-num {
-      font-size: clamp(36px, 5vw, 56px);
+    .trust-item:last-child { border-right: none; }
+    .trust-number {
+      font-size: 52px;
       font-weight: 900;
-      letter-spacing: -0.04em;
+      letter-spacing: -2px;
       color: var(--orange);
       line-height: 1;
-      display: block;
       margin-bottom: 8px;
     }
-
-    .proof-stat-label {
-      font-size: 13px;
+    .trust-label {
+      font-size: 14px;
       font-weight: 500;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.65);
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      line-height: 1.4;
+      letter-spacing: 0.06em;
     }
 
-    /* ============================================
-       PROBLEM — 3 COLUMNS
-    ============================================ */
-    .problem {
+    /* ─── INSIGHT ────────────────────────────────────── */
+    .insight {
+      background: var(--white);
       padding: 100px 0;
-      background: var(--bg-base);
     }
-
-    .section-eyebrow {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 16px;
+    .insight-header {
+      max-width: 640px;
+      margin: 0 auto 64px;
+      text-align: center;
     }
-
-    .section-heading {
-      font-size: clamp(28px, 4vw, 44px);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      color: var(--text-primary);
-      margin-bottom: 16px;
-    }
-
-    .section-sub {
-      font-size: 17px;
-      color: var(--text-secondary);
-      max-width: 560px;
-      line-height: 1.6;
-      margin-bottom: 56px;
-    }
-
-    .problem-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .problem-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 36px 32px;
-      position: relative;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .problem-card:hover {
-      border-color: #cccccc;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-    }
-
-    .problem-card.highlight {
-      border-color: var(--orange);
-      background: linear-gradient(145deg, rgba(255,92,0,0.04), #ffffff);
-    }
-
-    .problem-card.highlight::before {
-      content: 'THE SOLUTION';
-      position: absolute;
-      top: -1px;
-      left: 32px;
-      background: var(--orange);
-      color: #fff;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      padding: 4px 10px;
-      border-radius: 0 0 5px 5px;
-    }
-
-    .problem-icon {
-      width: 48px;
-      height: 48px;
-      background: #f5f5f5;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .section-h2 {
+      font-size: 44px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      color: var(--black);
       margin-bottom: 20px;
     }
-    .problem-card.highlight .problem-icon {
-      background: var(--orange-dim);
-    }
-
-    .problem-card h3 {
-      font-size: 19px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+    .section-body {
+      font-size: 17px;
+      color: var(--text-2);
+      line-height: 1.7;
       margin-bottom: 12px;
-      color: var(--text-primary);
     }
-
-    .problem-card p {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.65;
+    .insight-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
+    .insight-card {
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 32px 28px;
+      background: var(--white);
+    }
+    .insight-card.featured {
+      border-color: var(--orange);
+      background: #fff9f5;
+    }
+    .insight-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .insight-card-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+    .insight-card-body {
+      font-size: 14px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+    .insight-card.featured .insight-card-title { color: var(--orange); }
 
-    /* ============================================
-       PRODUCT SHOWCASE
-    ============================================ */
+    /* ─── PRODUCT SHOWCASE ───────────────────────────── */
     .showcase {
+      background: var(--grey);
       padding: 100px 0;
-      background: var(--bg-alt);
     }
-
     .showcase-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 72px;
+      gap: 80px;
       align-items: center;
     }
-
-    .showcase-image-wrap {
-      position: relative;
-    }
-
-    .showcase-image-wrap img {
-      width: 100%;
+    .showcase-img-wrap {
+      background: var(--white);
       border-radius: 16px;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.12);
+      overflow: hidden;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-
-    .hex-badge {
-      position: absolute;
-      top: 24px;
-      right: 24px;
-      background: var(--orange);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 0.06em;
-      padding: 8px 14px;
-      border-radius: 5px;
-      text-transform: uppercase;
-      box-shadow: 0 4px 20px rgba(255, 92, 0, 0.45);
-      transform: rotate(2deg);
+    .showcase-img-wrap img {
+      width: 100%;
+      height: auto;
+      max-height: 480px;
+      object-fit: contain;
     }
-
-    .showcase-content .product-name {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
+    .showcase-label {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--orange);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
-
-    .showcase-content h2 {
-      font-size: clamp(32px, 4vw, 46px);
+    .showcase-h2 {
+      font-size: 40px;
       font-weight: 900;
-      letter-spacing: -0.04em;
+      letter-spacing: -1.5px;
       line-height: 1.1;
-      margin-bottom: 16px;
-      color: var(--text-primary);
+      margin-bottom: 18px;
     }
-
-    .showcase-content .tagline {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 36px;
+    .showcase-body {
+      font-size: 16px;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 32px;
     }
-
-    .spec-list {
-      list-style: none;
+    .feature-list {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-bottom: 36px;
     }
-
-    .spec-list li {
+    .feature-item {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
       font-size: 15px;
-      color: var(--text-primary);
       font-weight: 500;
+      color: var(--text);
     }
-
-    .spec-list li::before {
-      content: '';
+    .feature-check {
+      flex-shrink: 0;
       width: 20px;
       height: 20px;
-      min-width: 20px;
-      background: var(--orange-dim);
-      border: 1.5px solid var(--orange);
-      border-radius: 4px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 6l2.8 2.8L10 3' stroke='%23FF5C00' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: center;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
     }
-
-    /* ============================================
-       HOW IT WORKS
-    ============================================ */
-    .howitworks {
-      padding: 100px 0;
-      background: var(--bg-alt);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .howitworks::before {
+    .feature-check::after {
       content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+      display: block;
+      width: 9px;
+      height: 5px;
+      border-left: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transform: rotate(-45deg) translate(1px, -1px);
     }
 
-    .howitworks .section-heading {
+    /* ─── HOW IT WORKS ───────────────────────────────── */
+    .how {
+      background: var(--white);
+      padding: 100px 0;
+      anchor-name: --how;
+    }
+    .how-header {
       text-align: center;
-      margin-bottom: 64px;
+      max-width: 600px;
+      margin: 0 auto 64px;
     }
-
     .steps {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 0;
-      position: relative;
     }
-
-    .steps::before {
-      content: '';
-      position: absolute;
-      top: 48px;
-      left: 12.5%;
-      right: 12.5%;
-      height: 1px;
-      background: linear-gradient(90deg, var(--orange) 0%, rgba(255,92,0,0.15) 100%);
-      z-index: 0;
-    }
-
     .step {
-      padding: 0 28px;
+      padding: 0 32px;
+      border-right: 1px solid var(--border);
       position: relative;
-      z-index: 1;
-      text-align: center;
     }
-
-    .step-number-wrap {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 28px;
+    .step:last-child { border-right: none; }
+    .step-number {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      display: block;
     }
-
-    .step-num-bg {
-      position: absolute;
-      font-size: 110px;
-      font-weight: 900;
-      color: rgba(0, 0, 0, 0.03);
-      letter-spacing: -0.05em;
-      line-height: 1;
-      user-select: none;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      white-space: nowrap;
-    }
-
-    .step-num {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--orange);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .step-title {
       font-size: 18px;
       font-weight: 800;
-      color: #fff;
-      position: relative;
-      z-index: 1;
-      box-shadow: 0 0 0 6px rgba(255, 92, 0, 0.12);
-    }
-
-    .step h3 {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      color: var(--black);
       margin-bottom: 10px;
-      color: var(--text-primary);
     }
-
-    .step p {
+    .step-body {
       font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.6;
+      color: var(--text-2);
+      line-height: 1.65;
     }
 
-    /* ============================================
-       THE SOCKET SHOT
-    ============================================ */
-    .socket-shot {
+    /* ─── IMAGE BREAK ────────────────────────────────── */
+    .image-break {
       position: relative;
-      height: 70vh;
-      min-height: 420px;
+      height: 50vh;
+      min-height: 320px;
       overflow: hidden;
     }
-
-    .socket-shot img {
+    .image-break img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 60%;
+      object-position: center;
+      display: block;
     }
-
-    .socket-overlay {
+    .image-break-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to right,
-        rgba(10,10,10,0.75) 0%,
-        rgba(10,10,10,0.3) 50%,
-        rgba(10,10,10,0.1) 100%
-      );
-      display: flex;
-      align-items: center;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
     }
-
-    .socket-text {
-      padding: 0 80px;
-      max-width: 640px;
+    .image-break-text {
+      position: absolute;
+      bottom: 44px;
+      left: 0;
+      right: 0;
     }
-
-    .socket-text h2 {
-      font-size: clamp(36px, 5.5vw, 68px);
+    .image-break-line1 {
+      font-size: 52px;
       font-weight: 900;
-      letter-spacing: -0.04em;
-      line-height: 1.05;
-      color: #fff;
+      letter-spacing: -2px;
+      color: var(--white);
+      line-height: 1;
     }
-
-    .socket-text h2 em {
-      font-style: normal;
+    .image-break-line2 {
+      font-size: 52px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      color: var(--white);
+      line-height: 1;
+    }
+    .image-break-line3 {
+      font-size: 52px;
+      font-weight: 900;
+      letter-spacing: -2px;
       color: var(--orange);
+      line-height: 1;
     }
 
-    /* ============================================
-       SPECS TABLE
-    ============================================ */
-    .specs-section {
+    /* ─── SPECS ──────────────────────────────────────── */
+    .specs {
+      background: var(--grey);
       padding: 100px 0;
-      background: var(--bg-base);
     }
-
-    .specs-section .section-heading {
+    .specs-header {
       text-align: center;
-      margin-bottom: 48px;
+      max-width: 600px;
+      margin: 0 auto 56px;
     }
-
     .specs-table-wrap {
-      max-width: 720px;
+      max-width: 680px;
       margin: 0 auto;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
     }
-
     .specs-table {
       width: 100%;
       border-collapse: collapse;
     }
-
     .specs-table tr {
       border-bottom: 1px solid var(--border);
-      transition: background 0.15s ease;
     }
     .specs-table tr:last-child { border-bottom: none; }
-    .specs-table tr:hover { background: #fafafa; }
-
     .specs-table td {
-      padding: 18px 28px;
+      padding: 16px 0;
       font-size: 15px;
-      background: transparent;
     }
-
     .specs-table td:first-child {
-      color: var(--text-secondary);
-      font-weight: 500;
-      width: 45%;
-      border-right: 1px solid var(--border);
-    }
-
-    .specs-table td:last-child {
-      color: var(--text-primary);
       font-weight: 600;
+      color: var(--text-2);
+      width: 50%;
+    }
+    .specs-table td:last-child {
+      font-weight: 700;
+      color: var(--black);
     }
 
-    .specs-table tr:nth-child(odd) td {
-      background: #f9f9f9;
-    }
-    .specs-table tr:nth-child(even) td {
-      background: #ffffff;
-    }
-
-    /* ============================================
-       TESTIMONIALS
-    ============================================ */
-    .testimonials-section {
+    /* ─── VS COMPARISON ──────────────────────────────── */
+    .vs {
+      background: var(--white);
       padding: 100px 0;
-      background: var(--bg-alt);
     }
-
-    .testimonials-section .section-heading {
+    .vs-header {
       text-align: center;
-      margin-bottom: 56px;
+      max-width: 600px;
+      margin: 0 auto 56px;
     }
+    .vs-table-wrap {
+      overflow-x: auto;
+    }
+    .vs-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 580px;
+    }
+    .vs-table th {
+      padding: 16px 20px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: center;
+    }
+    .vs-table th:first-child { text-align: left; }
+    .vs-table th.col-ours {
+      background: var(--orange);
+      color: var(--white);
+      border-radius: 10px 10px 0 0;
+    }
+    .vs-table th.col-label { color: var(--text-3); }
+    .vs-table th.col-other { color: var(--text-3); }
+    .vs-table td {
+      padding: 14px 20px;
+      font-size: 14px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .vs-table td:first-child { text-align: left; font-weight: 600; }
+    .vs-table td.col-ours {
+      background: #fff9f5;
+      font-weight: 700;
+      color: var(--orange);
+    }
+    .vs-table tr:last-child td { border-bottom: none; }
+    .vs-table tr:last-child td.col-ours { border-radius: 0 0 10px 10px; }
+    .tick { color: var(--orange); font-weight: 800; }
+    .cross { color: #ccc; }
 
+    /* ─── TESTIMONIALS ───────────────────────────────── */
+    .testimonials {
+      background: var(--grey);
+      padding: 100px 0;
+    }
+    .testimonials-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 56px;
+    }
     .testimonials-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
     }
-
     .testimonial-card {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-      transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      background: var(--white);
+      border-radius: 14px;
+      padding: 32px 28px;
+      border: 1.5px solid var(--border);
     }
-
-    .testimonial-card:hover {
-      border-color: rgba(255, 92, 0, 0.3);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-    }
-
-    .stars {
-      display: flex;
-      gap: 3px;
-    }
-
-    .star {
-      width: 16px;
-      height: 16px;
-      fill: var(--orange);
-    }
-
-    .testimonial-card blockquote {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      font-style: italic;
-      flex: 1;
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .author-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--orange), #a03800);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: 700;
-      color: #fff;
-      flex-shrink: 0;
-    }
-
-    .author-info strong {
-      display: block;
+    .testimonial-stars {
+      color: var(--orange);
       font-size: 14px;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+    .testimonial-text {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--black);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .testimonial-author {
+      font-size: 13px;
       font-weight: 700;
-      color: var(--text-primary);
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    .author-info span {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    /* ============================================
-       PRE-ORDER FORM
-    ============================================ */
+    /* ─── PRE-ORDER ──────────────────────────────────── */
     .preorder {
+      background: var(--white);
       padding: 100px 0;
-      background: var(--bg-base);
-      position: relative;
-      overflow: hidden;
     }
-
-    .preorder::before {
-      content: '';
-      position: absolute;
-      top: -200px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(255, 92, 0, 0.05) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
     .preorder-card {
       max-width: 560px;
       margin: 0 auto;
-      background: #ffffff;
-      border: 1.5px solid var(--orange);
-      border-radius: 16px;
-      padding: 48px;
-      position: relative;
-      box-shadow: 0 0 60px rgba(255, 92, 0, 0.08), 0 8px 40px rgba(0,0,0,0.06);
+      border: 2px solid var(--orange);
+      border-radius: 18px;
+      padding: 52px 48px;
     }
-
     .preorder-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: var(--orange-dim);
-      border: 1px solid rgba(255, 92, 0, 0.3);
+      background: #fff3ec;
       color: var(--orange);
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 6px 12px;
-      border-radius: 4px;
+      padding: 6px 14px;
+      border-radius: 100px;
       margin-bottom: 20px;
     }
-
-    .preorder-card h2 {
+    .preorder-h2 {
       font-size: 32px;
       font-weight: 900;
-      letter-spacing: -0.03em;
-      margin-bottom: 10px;
-      color: var(--text-primary);
+      letter-spacing: -1px;
+      margin-bottom: 12px;
     }
-
-    .preorder-card > p {
+    .preorder-sub {
       font-size: 15px;
-      color: var(--text-secondary);
-      margin-bottom: 28px;
+      color: var(--text-2);
       line-height: 1.6;
+      margin-bottom: 28px;
     }
-
-    .price-row {
-      display: flex;
-      align-items: baseline;
-      gap: 12px;
-      padding: 20px 24px;
-      background: rgba(255, 92, 0, 0.06);
-      border: 1px solid rgba(255, 92, 0, 0.2);
-      border-radius: 8px;
+    .preorder-price {
+      font-size: 44px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .preorder-shipping {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-3);
       margin-bottom: 32px;
     }
-
-    .price-big {
-      font-size: 42px;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      color: var(--orange);
+    .form-group {
+      margin-bottom: 14px;
     }
-
-    .price-detail {
+    .form-group label {
+      display: block;
       font-size: 13px;
-      color: var(--text-secondary);
-      line-height: 1.4;
+      font-weight: 700;
+      color: var(--text-2);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
-
-    .preorder-form {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .preorder-form input,
-    .preorder-form select {
+    .form-group input,
+    .form-group select {
       width: 100%;
-      background: #ffffff;
-      border: 1.5px solid #cccccc;
-      color: #111111;
+      padding: 13px 16px;
       font-family: var(--font);
       font-size: 15px;
-      padding: 14px 16px;
-      border-radius: 7px;
+      color: var(--text);
+      background: var(--white);
+      border: 1.5px solid var(--border-mid);
+      border-radius: var(--radius);
       outline: none;
-      transition: border-color 0.2s ease;
+      transition: border-color 0.15s;
       appearance: none;
+      -webkit-appearance: none;
     }
-
-    .preorder-form input::placeholder { color: var(--text-muted); }
-    .preorder-form select { color: var(--text-secondary); }
-    .preorder-form select option { background: #ffffff; color: #111111; }
-
-    .preorder-form input:focus,
-    .preorder-form select:focus {
-      border-color: var(--orange);
+    .form-group input:focus,
+    .form-group select:focus { border-color: var(--orange); }
+    .form-submit {
+      width: 100%;
+      padding: 17px;
+      font-size: 16px;
+      margin-top: 20px;
+      border-radius: var(--radius);
     }
-
-    .form-note {
+    .preorder-fine {
+      font-size: 12px;
+      color: var(--text-3);
       text-align: center;
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 6px;
-      line-height: 1.5;
+      margin-top: 14px;
     }
 
-    /* ============================================
-       FOOTER — intentionally dark
-    ============================================ */
-    footer {
-      padding: 56px 0 40px;
-      background: #111111;
-      border-top: 1px solid rgba(255,255,255,0.08);
+    /* ─── FAQ ────────────────────────────────────────── */
+    .faq {
+      background: var(--grey);
+      padding: 100px 0;
+    }
+    .faq-header {
       text-align: center;
+      max-width: 600px;
+      margin: 0 auto 56px;
+    }
+    .faq-list {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 28px 0;
+    }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+    .faq-a {
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.7;
     }
 
+    /* ─── FOOTER ─────────────────────────────────────── */
+    .footer {
+      background: var(--black);
+      padding: 60px 0 32px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: start;
+      gap: 32px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid #222;
+    }
     .footer-logo {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 900;
       letter-spacing: -0.04em;
       text-transform: uppercase;
-      margin-bottom: 12px;
-      color: #f0f0f0;
+      color: var(--white);
     }
-    .footer-logo span { color: var(--orange); }
-
-    .footer-tagline {
-      font-size: 14px;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 24px;
-    }
-
-    .footer-links {
+    .footer-logo .jack { color: var(--orange); }
+    .footer-nav {
       display: flex;
+      gap: 28px;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
+    }
+    .footer-nav a {
       font-size: 14px;
-      margin-bottom: 32px;
-      flex-wrap: wrap;
+      font-weight: 500;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.15s;
     }
-
-    .footer-links a {
-      color: rgba(255,255,255,0.45);
-      transition: color 0.2s ease;
+    .footer-nav a:hover { color: var(--white); }
+    .footer-contact {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-end;
     }
-    .footer-links a:hover { color: var(--orange); }
-
-    .footer-links .dot {
-      color: rgba(255,255,255,0.2);
+    .footer-email {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
     }
-
     .footer-social {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 32px;
+      gap: 16px;
     }
-
-    .social-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
+    .footer-social a {
+      font-size: 13px;
+      font-weight: 600;
       color: rgba(255,255,255,0.45);
-      transition: all 0.2s ease;
+      transition: color 0.15s;
     }
-    .social-link:hover {
-      border-color: var(--orange);
-      color: var(--orange);
+    .footer-social a:hover { color: var(--white); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 28px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-
-    .footer-small {
+    .footer-copy {
       font-size: 12px;
-      color: rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.3);
+    }
+    .footer-legal {
+      display: flex;
+      gap: 20px;
+    }
+    .footer-legal a {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+      transition: color 0.15s;
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+
+    /* ─── RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero-h1 { font-size: 56px; letter-spacing: -2px; }
+      .steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+      .step { border-right: none; padding: 0; }
+      .step:nth-child(odd) { padding-right: 20px; }
     }
 
-    /* ============================================
-       MOBILE RESPONSIVE
-    ============================================ */
     @media (max-width: 768px) {
-      .proof-bar-inner {
-        grid-template-columns: repeat(3, 1fr);
-      }
-      .proof-stat {
-        padding: 12px 8px;
-      }
-      .proof-stat-num {
-        font-size: 28px;
-      }
-      .proof-stat-label {
-        font-size: 10px;
-      }
-
-      .problem-grid {
+      .hero { padding: 60px 0; }
+      .hero-inner {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 48px;
       }
-      .problem-card.highlight::before {
-        left: 20px;
-      }
-
-      .showcase-inner {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .steps {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-      .steps::before { display: none; }
-      .step { padding: 0; }
-
-      .socket-text {
-        padding: 0 24px;
-      }
-
-      .testimonials-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-
-      .preorder-card {
-        padding: 32px 24px;
-      }
-
-      .howitworks .section-heading {
-        text-align: left;
-      }
-      .testimonials-section .section-heading,
-      .specs-section .section-heading {
-        text-align: left;
-      }
+      .hero-h1 { font-size: 44px; letter-spacing: -2px; }
+      .hero-sub { font-size: 17px; }
+      .hero-image { order: -1; padding: 16px; }
+      .trust-bar-inner { grid-template-columns: 1fr; gap: 32px; }
+      .trust-item { border-right: none; border-bottom: 1px solid #2a2a2a; padding: 0 0 28px; }
+      .trust-item:last-child { border-bottom: none; padding-bottom: 0; }
+      .trust-number { font-size: 40px; }
+      .insight-cards { grid-template-columns: 1fr; gap: 16px; }
+      .showcase-inner { grid-template-columns: 1fr; gap: 40px; }
+      .showcase-h2 { font-size: 32px; }
+      .section-h2 { font-size: 34px; letter-spacing: -1px; }
+      .steps { grid-template-columns: 1fr; gap: 32px; }
+      .step:nth-child(odd) { padding-right: 0; }
+      .image-break-line1,
+      .image-break-line2,
+      .image-break-line3 { font-size: 36px; letter-spacing: -1.5px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .preorder-card { padding: 36px 24px; }
+      .preorder-h2 { font-size: 26px; }
+      .preorder-price { font-size: 36px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-contact { align-items: flex-start; text-align: left; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
     }
 
     @media (max-width: 480px) {
-      .hero-cta { flex-direction: column; }
-      .hero-cta .btn { width: 100%; text-align: center; }
-      .btn-large { font-size: 15px; padding: 16px 24px; }
+      .hero-h1 { font-size: 36px; letter-spacing: -1.5px; }
+      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .nav-logo { font-size: 15px; }
+      .nav-cta { font-size: 12px; padding: 8px 14px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ============ NAV ============ -->
-  <nav>
-    <div class="nav-inner">
-      <div class="logo">CRACKA<span>JACK</span></div>
-      <a href="#preorder" class="btn-nav">Pre-Order — $149</a>
+  <!-- ═══════════════════════════════════════
+       NAV
+  ═══════════════════════════════════════ -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="nav-logo">CRACKA <span class="jack">JACK</span></div>
+      <a href="#preorder" class="btn-primary nav-cta">Pre-Order — $149 AUD</a>
     </div>
   </nav>
 
-  <!-- ============ HERO ============ -->
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-eyebrow reveal">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" fill="#FF5C00"/></svg>
-        Made for Australian Caravanners
-      </div>
-      <h1 class="reveal reveal-delay-1">Use the drill<br/>you <em>already carry.</em></h1>
-      <p class="hero-sub reveal reveal-delay-2">The world's first caravan front jack with a built-in 19mm hex drive. No new tools. No 12V wiring. Just the cordless drill sitting in your van right now.</p>
-      <div class="hero-cta reveal reveal-delay-3">
-        <a href="#preorder" class="btn btn-primary">Pre-Order — $149</a>
-        <a href="#howitworks" class="btn btn-ghost">See How It Works ↓</a>
-      </div>
-      <p class="hero-note reveal reveal-delay-4"><span>⚡ Limited first run</span> — 100 units only</p>
-    </div>
-    <div class="scroll-indicator">
-      <span>Scroll</span>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="6 9 12 15 18 9"></polyline>
-      </svg>
-    </div>
-  </section>
-
-  <!-- ============ SOCIAL PROOF BAR ============ -->
-  <section class="proof-bar">
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <section class="hero" id="home">
     <div class="container">
-      <div class="proof-bar-inner">
-        <div class="proof-stat reveal">
-          <span class="proof-stat-num">3.1M+</span>
-          <span class="proof-stat-label">Caravans on<br/>Australian roads</span>
+      <div class="hero-inner">
+
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="pill">🇦🇺 Australian Designed</span>
+          </div>
+          <h1 class="hero-h1">The Front Jack That<br>Works With Your Drill.</h1>
+          <p class="hero-sub">Every caravanner already carries a 19mm socket. Now your front jack uses it too.</p>
+          <div class="hero-actions">
+            <a href="#preorder" class="btn-primary">Pre-Order — $149</a>
+            <a href="#how" class="btn-ghost">How It Works ↓</a>
+          </div>
+          <p class="hero-scarcity">⚡ First run limited to 100 units</p>
         </div>
-        <div class="proof-stat reveal reveal-delay-1">
-          <span class="proof-stat-num">19mm</span>
-          <span class="proof-stat-label">Universal hex<br/>socket size</span>
+
+        <div class="hero-image">
+          <img src="images/product-hero.png" alt="Cracka Jack front jockey jack with 19mm hex drive" />
         </div>
-        <div class="proof-stat reveal reveal-delay-2">
-          <span class="proof-stat-num">$300+</span>
-          <span class="proof-stat-label">Saved vs<br/>electric alternatives</span>
-        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ============ THE PROBLEM ============ -->
-  <section class="problem">
+  <!-- ═══════════════════════════════════════
+       TRUST BAR
+  ═══════════════════════════════════════ -->
+  <section class="trust-bar">
     <div class="container">
-      <p class="section-eyebrow reveal">The Problem</p>
-      <h2 class="section-heading reveal">Every caravanner carries<br/>a drill. So why isn't your jack using it?</h2>
-      <p class="section-sub reveal">You already use a 19mm socket for your stabiliser legs. Your front jack should be no different.</p>
-      <div class="problem-grid">
-        <div class="problem-card reveal reveal-delay-1">
-          <div class="problem-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
-            </svg>
-          </div>
-          <h3>Manual Winders Are Slow</h3>
-          <p>Separate handle you have to hunt for. Slow, awkward cranking. An arm workout every time you set up camp.</p>
+      <div class="trust-bar-inner">
+
+        <div class="trust-item">
+          <div class="trust-number">3.1M+</div>
+          <div class="trust-label">Caravans on Australian roads</div>
         </div>
-        <div class="problem-card reveal reveal-delay-2">
-          <div class="problem-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-            </svg>
-          </div>
-          <h3>Electric Jacks Are Overkill</h3>
-          <p>$350–550. Requires 12V wiring. Battery-dependent. One more system that can fail 500km from the nearest town.</p>
+
+        <div class="trust-item">
+          <div class="trust-number">19mm</div>
+          <div class="trust-label">The universal socket size</div>
         </div>
-        <div class="problem-card highlight reveal reveal-delay-3">
-          <div class="problem-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF5C00" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
-            </svg>
-          </div>
-          <h3>Cracka Jack Is Just Right</h3>
-          <p>Your drill. Your 19mm socket. Wind it down in seconds. Nothing new to buy, wire up, or troubleshoot. Ever.</p>
+
+        <div class="trust-item">
+          <div class="trust-number">$320+</div>
+          <div class="trust-label">Less than electric alternatives</div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ============ PRODUCT SHOWCASE ============ -->
+  <!-- ═══════════════════════════════════════
+       THE INSIGHT
+  ═══════════════════════════════════════ -->
+  <section class="insight" id="insight">
+    <div class="container">
+
+      <div class="insight-header">
+        <h2 class="section-h2">You already have the tool.</h2>
+        <p class="section-body">Every caravanner has a cordless drill and a 19mm socket on board — you use it every time you set up your stability legs. The same combination you reach for without thinking.</p>
+        <p class="section-body">So why is the front jockey jack still a pain? Either you're cranking it by hand, or you're wiring in a $400+ electric unit. Neither makes sense when the answer is already in your tool bag.</p>
+      </div>
+
+      <div class="insight-cards">
+
+        <div class="insight-card">
+          <div class="insight-icon">😤</div>
+          <div class="insight-card-title">Manual winders</div>
+          <div class="insight-card-body">Slow, awkward, and requires a separate handle that always goes missing. Fine when you were 30.</div>
+        </div>
+
+        <div class="insight-card">
+          <div class="insight-icon">🔌</div>
+          <div class="insight-card-title">Electric jacks</div>
+          <div class="insight-card-body">$350–$550, needs 12V wiring, a dedicated battery, and a proprietary remote. One more thing to break.</div>
+        </div>
+
+        <div class="insight-card featured">
+          <div class="insight-icon">✅</div>
+          <div class="insight-card-title">Cracka Jack — $149</div>
+          <div class="insight-card-body">Uses the drill and 19mm socket you already carry. Nothing new to buy. Nothing new to wire. Just plug in and go.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       PRODUCT SHOWCASE
+  ═══════════════════════════════════════ -->
   <section class="showcase" id="product">
     <div class="container">
       <div class="showcase-inner">
-        <div class="showcase-image-wrap reveal">
-          <img src="images/product-hero.png" alt="Cracka Jack — 19mm hex drive caravan front jack" />
-          <div class="hex-badge">19mm HEX</div>
+
+        <div class="showcase-img-wrap">
+          <img src="images/product-hero.png" alt="Cracka Jack product detail — 19mm hex boss on top" />
         </div>
+
         <div class="showcase-content">
-          <p class="product-name reveal">Cracka Jack</p>
-          <h2 class="reveal reveal-delay-1">The Front Jack,<br/>Reinvented.</h2>
-          <p class="tagline reveal reveal-delay-2">Built from the ground up for Australian caravanners. Rated to 750kg. Tool-free height adjustment via removable pin — set your starting position before you drill. No wiring. No nonsense.</p>
-          <ul class="spec-list reveal reveal-delay-3">
-            <li>750kg load rating</li>
-            <li>19mm A/F hex drive — universal fit</li>
-            <li>350mm travel</li>
-            <li>Adjustable height via removable pin — multiple height positions, no tools needed</li>
-            <li>Under 2kg — lighter than electric</li>
-            <li>No wiring required</li>
-            <li>Zinc-plated steel — outback ready</li>
+          <div class="showcase-label">Cracka Jack</div>
+          <h2 class="showcase-h2">The Front Jack,<br>Reinvented.</h2>
+          <p class="showcase-body">Fits your existing 50mm A-frame clamp. Wind it with the drill you already carry. Machined height adjustment, powder-coated finish, 750kg rated.</p>
+
+          <ul class="feature-list">
+            <li class="feature-item">
+              <span class="feature-check"></span>
+              <span>19mm A/F hex drive on top — use your drill</span>
+            </li>
+            <li class="feature-item">
+              <span class="feature-check"></span>
+              <span>Quick-release pin height adjustment</span>
+            </li>
+            <li class="feature-item">
+              <span class="feature-check"></span>
+              <span>Fits standard 50mm A-frame clamp</span>
+            </li>
+            <li class="feature-item">
+              <span class="feature-check"></span>
+              <span>750kg rated</span>
+            </li>
+            <li class="feature-item">
+              <span class="feature-check"></span>
+              <span>400mm travel</span>
+            </li>
+            <li class="feature-item">
+              <span class="feature-check"></span>
+              <span>Under 2kg</span>
+            </li>
+            <li class="feature-item">
+              <span class="feature-check"></span>
+              <span>No wiring, no battery pack, no hassle</span>
+            </li>
           </ul>
-          <a href="#preorder" class="btn btn-primary reveal reveal-delay-4">Pre-Order — $149 AUD</a>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ============ HOW IT WORKS ============ -->
-  <section class="howitworks" id="howitworks">
+  <!-- ═══════════════════════════════════════
+       HOW IT WORKS
+  ═══════════════════════════════════════ -->
+  <section class="how" id="how">
     <div class="container">
-      <h2 class="section-heading reveal">Dead simple.<br/>By design.</h2>
+
+      <div class="how-header">
+        <h2 class="section-h2">Three steps.<br>Fifteen seconds.</h2>
+      </div>
+
       <div class="steps">
-        <div class="step reveal reveal-delay-1">
-          <div class="step-number-wrap">
-            <div class="step-num-bg">01</div>
-            <div class="step-num">1</div>
-          </div>
-          <h3>Set your height</h3>
-          <p>Slide the lower leg to your preferred starting height and lock the pin. Done in seconds — no tools needed.</p>
+
+        <div class="step">
+          <span class="step-number">01 — Set height</span>
+          <div class="step-title">Slide and lock.</div>
+          <p class="step-body">Slide the inner tube to your starting position. Lock the quick-release pin through the machined ribs on the outer tube.</p>
         </div>
-        <div class="step reveal reveal-delay-2">
-          <div class="step-number-wrap">
-            <div class="step-num-bg">02</div>
-            <div class="step-num">2</div>
-          </div>
-          <h3>Pull up at your site</h3>
-          <p>Unhitch, grab the drill you already have in the van. No hunting for a separate handle.</p>
+
+        <div class="step">
+          <span class="step-number">02 — Pull up at your site</span>
+          <div class="step-title">Unhitch. Grab your drill.</div>
+          <p class="step-body">Unhitch from the tow vehicle, then reach inside the van for the drill you already have. The one you brought for the legs.</p>
         </div>
-        <div class="step reveal reveal-delay-3">
-          <div class="step-number-wrap">
-            <div class="step-num-bg">03</div>
-            <div class="step-num">3</div>
-          </div>
-          <h3>Fit your 19mm socket</h3>
-          <p>Same socket you already use for the stabiliser legs. Drop it straight on the hex boss.</p>
+
+        <div class="step">
+          <span class="step-number">03 — Fit your 19mm socket</span>
+          <div class="step-title">Same one. Different job.</div>
+          <p class="step-body">Drop your 19mm socket onto the hex boss on top of the jack. Same socket, same drill, same setup — just a different hole.</p>
         </div>
-        <div class="step reveal reveal-delay-4">
-          <div class="step-number-wrap">
-            <div class="step-num-bg">04</div>
-            <div class="step-num">4</div>
-          </div>
-          <h3>Pull the trigger</h3>
-          <p>Wind it down in seconds. Reverse to pack up. Done. Go get a beer.</p>
+
+        <div class="step">
+          <span class="step-number">04 — Pull the trigger</span>
+          <div class="step-title">Wind it down. Done.</div>
+          <p class="step-body">Drill winds the jack to the ground in seconds. Reverse to pack up. That's it. That's the whole process.</p>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ============ THE SOCKET SHOT ============ -->
-  <section class="socket-shot">
-    <img src="images/drill-socket-closeup.png" alt="19mm socket fitting onto Cracka Jack hex drive — same socket, same drill" />
-    <div class="socket-overlay">
-      <div class="socket-text">
-        <h2 class="reveal">Same socket.<br/>Same drill.<br/><em>New jack.</em></h2>
+  <!-- ═══════════════════════════════════════
+       FULL-WIDTH IMAGE BREAK
+  ═══════════════════════════════════════ -->
+  <div class="image-break">
+    <img src="images/drill-socket-closeup.png" alt="19mm socket on Cracka Jack hex drive" />
+    <div class="image-break-overlay"></div>
+    <div class="image-break-text">
+      <div class="container">
+        <div class="image-break-line1">Same socket.</div>
+        <div class="image-break-line2">Same drill.</div>
+        <div class="image-break-line3">New jack.</div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ============ SPECS TABLE ============ -->
-  <section class="specs-section">
+  <!-- ═══════════════════════════════════════
+       SPECS
+  ═══════════════════════════════════════ -->
+  <section class="specs" id="specs">
     <div class="container">
-      <p class="section-eyebrow reveal" style="text-align:center">Technical Specs</p>
-      <h2 class="section-heading reveal" style="text-align:center">Built to last.<br/>Specified to perform.</h2>
-      <div class="specs-table-wrap reveal">
+
+      <div class="specs-header">
+        <h2 class="section-h2">Specifications</h2>
+      </div>
+
+      <div class="specs-table-wrap">
         <table class="specs-table">
           <tbody>
             <tr>
-              <td>Load Rating</td>
-              <td>750 kg</td>
+              <td>Load rating</td>
+              <td>750kg</td>
             </tr>
             <tr>
               <td>Drive</td>
-              <td>19mm A/F Hex</td>
+              <td>19mm A/F hex</td>
             </tr>
             <tr>
               <td>Travel</td>
-              <td>350 mm</td>
-            </tr>
-            <tr>
-              <td>Height Adjustment</td>
-              <td>Removable pin, multiple positions</td>
-            </tr>
-            <tr>
-              <td>Weight</td>
-              <td>&lt; 2 kg</td>
+              <td>400mm</td>
             </tr>
             <tr>
               <td>Mount</td>
-              <td>Round tube — fits standard A-frame clamp (48–60mm)</td>
+              <td>50mm A-frame clamp (standard)</td>
             </tr>
             <tr>
-              <td>Material</td>
-              <td>Zinc-plated steel</td>
+              <td>Height adjustment</td>
+              <td>Quick-release pin, multiple positions</td>
+            </tr>
+            <tr>
+              <td>Weight</td>
+              <td>Under 2kg</td>
+            </tr>
+            <tr>
+              <td>Finish</td>
+              <td>Black powder-coat</td>
             </tr>
             <tr>
               <td>Warranty</td>
@@ -1296,175 +1092,233 @@
           </tbody>
         </table>
       </div>
+
     </div>
   </section>
 
-  <!-- ============ TESTIMONIALS ============ -->
-  <section class="testimonials-section">
+  <!-- ═══════════════════════════════════════
+       VS COMPARISON
+  ═══════════════════════════════════════ -->
+  <section class="vs" id="compare">
     <div class="container">
-      <p class="section-eyebrow reveal" style="text-align:center">Early Feedback</p>
-      <h2 class="section-heading reveal" style="text-align:center">Caravanners get it<br/>immediately.</h2>
+
+      <div class="vs-header">
+        <h2 class="section-h2">Cracka Jack vs The Rest</h2>
+      </div>
+
+      <div class="vs-table-wrap">
+        <table class="vs-table">
+          <thead>
+            <tr>
+              <th class="col-label"></th>
+              <th class="col-other">Manual Jack</th>
+              <th class="col-other">Electric Jack</th>
+              <th class="col-ours">Cracka Jack</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Price</td>
+              <td>$40–$120</td>
+              <td>$350–$550</td>
+              <td class="col-ours">$149</td>
+            </tr>
+            <tr>
+              <td>Power source</td>
+              <td>Your arms</td>
+              <td>12V wired</td>
+              <td class="col-ours">Your drill</td>
+            </tr>
+            <tr>
+              <td>Tool needed</td>
+              <td>Separate handle</td>
+              <td>Proprietary remote</td>
+              <td class="col-ours">19mm socket (you have it)</td>
+            </tr>
+            <tr>
+              <td>Setup time</td>
+              <td>Moderate</td>
+              <td>Fast (once wired)</td>
+              <td class="col-ours">Fast — no wiring</td>
+            </tr>
+            <tr>
+              <td>Wiring required</td>
+              <td><span class="cross">✗</span> None</td>
+              <td><span class="cross">✗</span> Yes — complex</td>
+              <td class="col-ours"><span class="tick">✓</span> None</td>
+            </tr>
+            <tr>
+              <td>Rating</td>
+              <td>Varies</td>
+              <td>Varies</td>
+              <td class="col-ours">750kg</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       TESTIMONIALS
+  ═══════════════════════════════════════ -->
+  <section class="testimonials" id="reviews">
+    <div class="container">
+
+      <div class="testimonials-header">
+        <h2 class="section-h2">What early backers are saying</h2>
+      </div>
+
       <div class="testimonials-grid">
-        <div class="testimonial-card reveal reveal-delay-1">
-          <div class="stars">
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <blockquote>"Finally. I've been using a 19mm socket on my legs for years — why hasn't anyone done this for the front jack?! Pre-ordered two minutes after I saw it."</blockquote>
-          <div class="testimonial-author">
-            <div class="author-avatar">D</div>
-            <div class="author-info">
-              <strong>Dave M.</strong>
-              <span>Grey Nomad · Queensland</span>
-            </div>
-          </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Finally. Been using a 19mm on my legs for years — took someone this long to put a hex on the front jack."</p>
+          <div class="testimonial-author">Dave M. — Grey Nomad, QLD</div>
         </div>
-        <div class="testimonial-card reveal reveal-delay-2">
-          <div class="stars">
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <blockquote>"Saw the pre-order and bought one without hesitation. The concept is so obvious it's almost offensive nobody did it sooner. My wife's already claimed it."</blockquote>
-          <div class="testimonial-author">
-            <div class="author-avatar">K</div>
-            <div class="author-info">
-              <strong>Karen T.</strong>
-              <span>Caravanning Australia · Facebook Group</span>
-            </div>
-          </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Pre-ordered immediately. Such an obvious idea. Can't believe no one's done it before."</p>
+          <div class="testimonial-author">Karen T. — Facebook: Caravanning Australia</div>
         </div>
-        <div class="testimonial-card reveal reveal-delay-3">
-          <div class="stars">
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          </div>
-          <blockquote>"Cheaper than electric, smarter than manual. Rated 750kg, weighs nothing, needs zero wiring. This is the one. Bought two — one for the A-van, one for the mate."</blockquote>
-          <div class="testimonial-author">
-            <div class="author-avatar">B</div>
-            <div class="author-info">
-              <strong>Brett H.</strong>
-              <span>Unsealed 4X4 Forum · WA</span>
-            </div>
-          </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Cheaper than electric, smarter than manual. This is exactly what I've been waiting for."</p>
+          <div class="testimonial-author">Brett H. — Unsealed 4X4 Forum</div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ============ PRE-ORDER ============ -->
+  <!-- ═══════════════════════════════════════
+       PRE-ORDER
+  ═══════════════════════════════════════ -->
   <section class="preorder" id="preorder">
     <div class="container">
-      <div class="preorder-card reveal">
+      <div class="preorder-card">
+
         <div class="preorder-badge">🔥 First Run — 100 Units Only</div>
-        <h2>Pre-Order Your Cracka Jack</h2>
-        <p>Secure your first-run unit at the launch price. Ships within 8 weeks of production confirmation.</p>
-        <div class="price-row">
-          <span class="price-big">$149</span>
-          <span class="price-detail">AUD incl. GST<br/>Free shipping Australia-wide</span>
-        </div>
-        <form class="preorder-form" onsubmit="handleSubmit(event)">
-          <input type="text" name="name" placeholder="Your name" required autocomplete="name" />
-          <input type="email" name="email" placeholder="Email address" required autocomplete="email" />
-          <input type="tel" name="phone" placeholder="Phone (optional)" autocomplete="tel" />
-          <select name="source">
-            <option value="">Where did you hear about us?</option>
-            <option value="facebook">Facebook Group</option>
-            <option value="friend">Friend / Word of mouth</option>
-            <option value="google">Google</option>
-            <option value="show">Caravan show</option>
-            <option value="youtube">YouTube</option>
-            <option value="other">Other</option>
-          </select>
-          <button type="submit" class="btn btn-primary btn-large">Secure My Cracka Jack →</button>
-          <p class="form-note">No charge today — we confirm when production is locked in.</p>
+        <h2 class="preorder-h2">Pre-Order Your Cracka Jack</h2>
+        <p class="preorder-sub">No charge today. We confirm production once we hit our first run minimum. You'll be first to know.</p>
+        <div class="preorder-price">$149 AUD</div>
+        <div class="preorder-shipping">Free shipping Australia-wide</div>
+
+        <form onsubmit="return false;">
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="+61 4xx xxx xxx" autocomplete="tel" />
+          </div>
+          <div class="form-group">
+            <label for="source">How did you hear about us?</label>
+            <select id="source" name="source">
+              <option value="" disabled selected>Select an option</option>
+              <option value="facebook">Facebook</option>
+              <option value="instagram">Instagram</option>
+              <option value="forum">Caravan / 4WD forum</option>
+              <option value="friend">Friend or family</option>
+              <option value="google">Google search</option>
+              <option value="youtube">YouTube</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary form-submit">Secure My Cracka Jack →</button>
         </form>
+
+        <p class="preorder-fine">You won't be charged until production is confirmed.</p>
+
       </div>
     </div>
   </section>
 
-  <!-- ============ FOOTER ============ -->
-  <footer>
+  <!-- ═══════════════════════════════════════
+       FAQ
+  ═══════════════════════════════════════ -->
+  <section class="faq" id="faq">
     <div class="container">
-      <div class="footer-logo">CRACKA<span>JACK</span></div>
-      <p class="footer-tagline">Australian designed. Built for Australian conditions.</p>
-      <div class="footer-links">
-        <a href="mailto:hello@crackajack.com.au">hello@crackajack.com.au</a>
-        <span class="dot">·</span>
-        <a href="#preorder">Pre-Order</a>
-        <span class="dot">·</span>
-        <a href="#howitworks">How It Works</a>
-        <span class="dot">·</span>
-        <a href="#product">Product</a>
+
+      <div class="faq-header">
+        <h2 class="section-h2">Common questions</h2>
       </div>
-      <div class="footer-social">
-        <!-- Instagram -->
-        <a href="#" class="social-link" aria-label="Instagram">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-          </svg>
-        </a>
-        <!-- Facebook -->
-        <a href="#" class="social-link" aria-label="Facebook">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-          </svg>
-        </a>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <div class="faq-q">When will it ship?</div>
+          <p class="faq-a">We're confirming our first production run. Once we hit 100 pre-orders, we'll lock in manufacturing. Estimated delivery is 8–10 weeks after confirmation. We'll keep you updated every step of the way.</p>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">What drill does it work with?</div>
+          <p class="faq-a">Any cordless drill with a 19mm socket — the same setup you already use on your stability legs. If it turns a 19mm socket, it'll turn the Cracka Jack.</p>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Does it fit my caravan?</div>
+          <p class="faq-a">Cracka Jack fits any standard 50mm A-frame jockey wheel clamp. If your current jockey wheel fits a 50mm clamp, Cracka Jack will drop straight in with no modification needed.</p>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Is it street-legal to leave on while driving?</div>
+          <p class="faq-a">Yes, with the pin locked in position. We also recommend using the included travel lock strap for longer trips on rougher roads.</p>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">What's the return policy?</div>
+          <p class="faq-a">30-day no-questions return on all units. If it doesn't work for your setup, contact us and we'll organise a full refund.</p>
+        </div>
+
       </div>
-      <p class="footer-small">© 2026 Cracka Jack. All rights reserved. ABN: [TBC] · <a href="#" style="color: inherit;">Privacy Policy</a></p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo">CRACKA <span class="jack">JACK</span></div>
+        </div>
+
+        <nav class="footer-nav">
+          <a href="#how">How It Works</a>
+          <a href="#specs">Specs</a>
+          <a href="#preorder">Pre-Order</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+
+        <div class="footer-contact">
+          <a href="mailto:hello@crackajack.com.au" class="footer-email">hello@crackajack.com.au</a>
+          <div class="footer-social">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Cracka Jack | ABN pending</span>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+
     </div>
   </footer>
-
-  <script>
-    // Scroll reveal with IntersectionObserver
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Form submit
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('button[type="submit"]');
-      btn.textContent = '✅ You\'re on the list!';
-      btn.style.background = '#16a34a';
-      btn.style.boxShadow = '0 4px 24px rgba(22, 163, 74, 0.4)';
-      btn.disabled = true;
-    }
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    // Nav background on scroll
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      nav.style.background = window.scrollY > 60
-        ? 'rgba(255, 255, 255, 0.98)'
-        : 'rgba(255, 255, 255, 0.92)';
-    }, { passive: true });
-  </script>
 
 </body>
 </html>
